@@ -32,16 +32,25 @@ const Manillas = () => {
         const  tipo = document.getElementById("inputGroupSelect03").value
         const  cantidad = document.getElementById("cantidad").value
 
+        console.log(material +"-"+ dije+"-"+tipo+"-"+cantidad)
+
         if(material != "Seleccione..." && dije != "Seleccione..." && tipo != "Seleccione..." && cantidad !=''){
-            listaManillas.forEach(element => {
+            for(let element of listaManillas){
+                console.log("-------------------------------")
+                console.log(element.material+"="+material)
+                console.log(element.dije+"="+dije)
+                console.log(element.tipo+"="+tipo)
                 if(element.material==material && element.dije==dije && element.tipo==tipo){
+                    console.log("Iguales")
                     setValorDolar((element.valor*cantidad).toLocaleString("en")+" dólares")
                     setValorPeso((element.valor*cantidad*5000).toLocaleString("en") +" COP")
+                    break
                 }else{
+                    console.log("Distinto")
                     setValorDolar("No disponible")
                     setValorPeso("No disponible")
                 }
-            })       
+            }       
         }        
     }
 
@@ -52,7 +61,7 @@ const Manillas = () => {
     <div className='container mt-5'>
         <h1 className='text-center'>XYZ - Manillas</h1>
         <hr />
-        {/*<div className='row'>
+        <div className='row'>
             <div className="col-10">
                 <h4 className="text-center">Listado de opciones</h4>
                 <table className='table'>
@@ -79,7 +88,7 @@ const Manillas = () => {
                     </tbody>
                 </table>
             </div>
-        </div>*/}
+        </div>
         <h2 className='text-center'>¿Quieres comprar? Calcula el valor</h2>
         <div className='row'>
             <div className='col-2'>
