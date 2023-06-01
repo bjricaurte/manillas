@@ -6,11 +6,9 @@ const Manillas = () => {
     const [listaMateriales, setListaMateriales] = useState([])
     const [listaDijenes, setListaDijen] = useState([])
     const [listaTipos, setListaTipos] = useState([])
-    //const [lvalor, setValor] = useState('')
     const [listaManillas, setListaManillas] = useState([])
     const [valor, setValor] = useState("0");
 
-    var listaManillasA= []
 
     useEffect(()=>{
         const obtenerDatos = async() =>{
@@ -18,7 +16,6 @@ const Manillas = () => {
                 await onSnapshot(collection(db, 'manillas'), (query) =>{
                     setListaManillas(query.docs.map((doc)=>({...doc.data(), id:doc.id})))
                     console.log(listaManillas)
-                    listaManillasA = listaManillas
                 })
             }catch(error){
                 console.log(error)
@@ -29,14 +26,20 @@ const Manillas = () => {
     
     
     const actualizarValor = () =>{
-        console.log(document.getElementById("inputGroupSelect01").value)
-        console.log(document.getElementById("inputGroupSelect02").value)
-        console.log(document.getElementById("inputGroupSelect03").value)
+        var material = document.getElementById("inputGroupSelect01").value
+        var dije = document.getElementById("inputGroupSelect02").value
+        var tipo = document.getElementById("inputGroupSelect03").value
 
-        console.log(listaManillasA)
+        console.log(listaManillas)
 
-        listaManillasA.forEach(element => console.log(element.valor))
-        setValor("10000")
+        if(material != "Seleccione..." && dije != "Seleccione..." && tipo != "Seleccione..."){
+            listaManillas.forEach(element => {
+                if(element.material==material && element.dije==dije && element.tipo==tipo){
+                    setValor(element.valor)
+                }
+            })       
+        }
+        console.log(valor)
     }
 
 
@@ -82,7 +85,7 @@ const Manillas = () => {
                         <label class="input-group-text" for="inputGroupSelect01">Material</label>
                     </div>
                     <select class="custom-select" id="inputGroupSelect01" onChange={()=>actualizarValor()}>
-                        <option selected>Selecione...</option>
+                        <option selected>Seleccione...</option>
                         <option value="Cuero">Cuero</option>
                         <option value="Cuerda">Cuerda</option>
                     </select>
@@ -94,7 +97,7 @@ const Manillas = () => {
                         <label class="input-group-text" for="inputGroupSelect02">Dije</label>
                     </div>
                     <select class="custom-select" id="inputGroupSelect02" onChange={()=>actualizarValor()}>
-                        <option selected>Selecione...</option>
+                        <option selected>Seleccione...</option>
                         <option value="Martillo">Martillo</option>
                         <option value="Ancla">Ancla</option>
                     </select>
