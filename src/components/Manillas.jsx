@@ -61,7 +61,7 @@ const Manillas = () => {
     <div className='container mt-5'>
         <h1 className='text-center'>XYZ - Manillas</h1>
         <hr />
-        <div className='row'>
+        {/*<div className='row'>
             <div className="col-10">
                 <h4 className="text-center">Listado de opciones</h4>
                 <table className='table'>
@@ -88,7 +88,7 @@ const Manillas = () => {
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div>*/}
         <h2 className='text-center'>¿Quieres comprar? Calcula el valor</h2>
         <div className='row'>
             <div className='col-2'>
