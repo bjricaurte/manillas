@@ -30,14 +30,13 @@ const Manillas = () => {
         const  material = document.getElementById("inputGroupSelect01").value
         const  dije = document.getElementById("inputGroupSelect02").value
         const  tipo = document.getElementById("inputGroupSelect03").value
+        const  cantidad = document.getElementById("cantidad").value
 
-        console.log(listaManillas)
-
-        if(material != "Seleccione..." && dije != "Seleccione..." && tipo != "Seleccione..."){
+        if(material != "Seleccione..." && dije != "Seleccione..." && tipo != "Seleccione..." && cantidad !=''){
             listaManillas.forEach(element => {
                 if(element.material==material && element.dije==dije && element.tipo==tipo){
-                    setValorDolar(element.valor.toLocaleString("en")+" dólares")
-                    setValorPeso((element.valor*5000).toLocaleString("en") +" COP")
+                    setValorDolar((element.valor*cantidad).toLocaleString("en")+" dólares")
+                    setValorPeso((element.valor*cantidad*5000).toLocaleString("en") +" COP")
                 }else{
                     setValorDolar("No disponible")
                     setValorPeso("No disponible")
@@ -81,9 +80,9 @@ const Manillas = () => {
                 </table>
             </div>
         </div>*/}
-        <h2 className='text-center'>Calcular el valor de mi manilla</h2>
+        <h2 className='text-center'>¿Quieres comprar? Calcula el valor</h2>
         <div className='row'>
-            <div className='col-3'>
+            <div className='col-2'>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">Material</label>
@@ -95,7 +94,7 @@ const Manillas = () => {
                     </select>
                 </div>
             </div>
-            <div className='col-3'>
+            <div className='col-2'>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect02">Dije</label>
@@ -107,7 +106,7 @@ const Manillas = () => {
                     </select>
                 </div>
             </div>
-            <div className='col-3'>
+            <div className='col-2'>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect03">Tipo</label>
@@ -121,7 +120,15 @@ const Manillas = () => {
                     </select>
                 </div>
             </div>
-            <div className='col-3'>
+            <div className='col-2'>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Cantidad</span>
+                    </div>
+                    <input type="number" class="form-control" aria-label="Username" aria-describedby="basic-addon1" id='cantidad' onChange={()=>actualizarValor()}/>
+                </div>
+            </div>
+            <div className='col-4'>
                 <span>Valor: {valorDolar} ({valorPeso}) </span>
             </div>
         </div>
