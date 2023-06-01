@@ -7,7 +7,8 @@ const Manillas = () => {
     const [listaDijenes, setListaDijen] = useState([])
     const [listaTipos, setListaTipos] = useState([])
     const [listaManillas, setListaManillas] = useState([])
-    const [valor, setValor] = useState("0");
+    const [valorDolar, setValorDolar] = useState("0");
+    const [valorPeso, setValorPeso] = useState("0");
 
 
     useEffect(()=>{
@@ -26,20 +27,23 @@ const Manillas = () => {
     
     
     const actualizarValor = () =>{
-        var material = document.getElementById("inputGroupSelect01").value
-        var dije = document.getElementById("inputGroupSelect02").value
-        var tipo = document.getElementById("inputGroupSelect03").value
+        const  material = document.getElementById("inputGroupSelect01").value
+        const  dije = document.getElementById("inputGroupSelect02").value
+        const  tipo = document.getElementById("inputGroupSelect03").value
 
         console.log(listaManillas)
 
         if(material != "Seleccione..." && dije != "Seleccione..." && tipo != "Seleccione..."){
             listaManillas.forEach(element => {
                 if(element.material==material && element.dije==dije && element.tipo==tipo){
-                    setValor(element.valor)
+                    setValorDolar(element.valor.toLocaleString("en")+" dólares")
+                    setValorPeso((element.valor*5000).toLocaleString("en") +" COP")
+                }else{
+                    setValorDolar("No disponible")
+                    setValorPeso("No disponible")
                 }
             })       
-        }
-        console.log(valor)
+        }        
     }
 
 
@@ -49,7 +53,7 @@ const Manillas = () => {
     <div className='container mt-5'>
         <h1 className='text-center'>XYZ - Manillas</h1>
         <hr />
-        <div className='row'>
+        {/*<div className='row'>
             <div className="col-10">
                 <h4 className="text-center">Listado de opciones</h4>
                 <table className='table'>
@@ -76,7 +80,7 @@ const Manillas = () => {
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div>*/}
         <h2 className='text-center'>Calcular el valor de mi manilla</h2>
         <div className='row'>
             <div className='col-3'>
@@ -118,7 +122,7 @@ const Manillas = () => {
                 </div>
             </div>
             <div className='col-3'>
-                <span>Valor: {valor} dólares ({valor*5000}) COP</span>
+                <span>Valor: {valorDolar} ({valorPeso}) </span>
             </div>
         </div>
     </div>
